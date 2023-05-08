@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
         })
     );
   } catch (error) {
-    res.status(400).json({ message: " Unablew to fetch data from database"});
+    res.status(400).json({ message: " Unable to fetch data from database"});
   }
   
 });

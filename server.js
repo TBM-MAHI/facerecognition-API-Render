@@ -3,6 +3,7 @@ const bodyParser = require("express");
 const bcrypt = require("bcrypt");
 var cors = require("cors");
 let app = express();
+require('dotenv').config();
 //importing API-endpoint functions 
 let signin = require('./controller/signIn/signIn')
 let register = require('./controller/Register/register')
@@ -17,8 +18,8 @@ const knex = require("knex")({
     host: "127.0.0.1",
     port: 5432,
     user: "postgres",
-    password: "mahi61",
-    database: "facerecognition",
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
   },
 });
 
@@ -29,15 +30,14 @@ app.use(cors());
 
 app.get("/", (req, res) => {
   try {
-    console.log(
-      knex
+   knex
         .select("*")
         .from("users")
         .then((data) => {
           console.log(data);
-          res.json(data);
+          res.send(200).json({ "data": data })
         })
-    );
+  
   } catch (error) {
     res.status(400).json({ message: " Unable to fetch data from database"});
   }
@@ -62,6 +62,8 @@ app.post('/imageAPIcall', (req, res) => {
 })
 app.listen( PORT, (req, res) => {
   console.log(`server is listening...at port ${PORT} `);
+  console.log(process.env.MY_VAR); 
+
 });
 
 /*

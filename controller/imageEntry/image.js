@@ -1,3 +1,4 @@
+require("dotenv").config({ path: "../../.env" });
 let handleImgaeAPI = (req, res) => {
   console.log("loading...");
   let { imgURL } = req.body;
@@ -5,8 +6,9 @@ let handleImgaeAPI = (req, res) => {
   // const IMAGE_URL = "https://th.bing.com/th/id/OIP.vIQr_keH9CObzE7niK_lcgHaEo?pid=ImgDet&rs=1";
   // const IMAGE_URL = "https://c.stocksy.com/a/wyk500/z9/1372242.jpg";
   const PAT = process.env.PAT;
+  console.log(process.env.PAT);
   const MODEL_ID = "face-detection";
-  const MODEL_VERSION_ID = process.env.MODEL_VERSION_ID; 
+  const MODEL_VERSION_ID = process.env.MODEL_VERSION_ID;
   const raw = JSON.stringify({
     user_app_id: {
       user_id: "mahi89",
@@ -44,10 +46,9 @@ let handleImgaeAPI = (req, res) => {
       "/outputs",
     requestOptions
   )
-    .then((apiData) => 
-     apiData.json()
-    ).then(result=> res.send(result))
-   
+    .then((apiData) => apiData.json())
+    .then((result) => res.send(result))
+
     .catch((err) => res.status(400).json({ msg: "error" }));
 };
 

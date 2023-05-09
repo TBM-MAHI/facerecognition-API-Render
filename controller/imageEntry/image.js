@@ -1,4 +1,6 @@
 require("dotenv").config({ path: "../../.env" });
+const fetch = require('node-fetch');
+
 let handleImgaeAPI = (req, res) => {
   console.log("loading...");
   let { imgURL } = req.body;
@@ -49,7 +51,7 @@ let handleImgaeAPI = (req, res) => {
     .then((apiData) => apiData.json())
     .then((result) => res.send(result))
 
-    .catch((err) => res.status(400).json({ msg: "error" }));
+    .catch((err) => res.status(400).json({ "error": err }));
 };
 
 let entryHandler = (req, res, knex) => {

@@ -10,9 +10,9 @@ let register = require('./controller/Register/register')
 let profile = require('./controller/profile/profile')
 let image = require("./controller/imageEntry/image");
 
-let connectionToDB =require('./db') ;
 const PORT = process.env.PORT || 3001;
 let saltRounds = 10;
+
 //connect to postgres SQL
 const knex = require("knex")({
   client: "pg",

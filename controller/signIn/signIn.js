@@ -2,7 +2,8 @@ const signInHandler = (knex, bcrypt) => (req, res) => {
     let { email, password } = req.body;
    if (!email || !password)
      return res.status(400).json({ message: "Input fields Empty!" });
-   knex
+  
+  knex
      .select("email", "hash")
      .from("login")
      .where("email", "=", req.body.email)
@@ -15,8 +16,8 @@ const signInHandler = (knex, bcrypt) => (req, res) => {
            .from("users")
            .where("email", "=", req.body.email)
            .then((user) => {
-             console.log(user);
-             res.json(user[0]);
+             //console.log(user);
+             res.status(200).json({ message: `sign in Success for ${user[0].name}` });
            })
            .catch((err) => res.status(400).json("Unable to get user"));
        }

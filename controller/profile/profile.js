@@ -9,7 +9,7 @@ let profileHandler=(req, res,knex) => {
     .then((response) => {
       if (response.length) {
         console.log(response);
-        res.send(response[0]);
+        return res.send(response[0]);
       } else
           return res.status(400).send("User Not Found");
     }).catch((err)=>res.status(400).send("User Not Found"));

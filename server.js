@@ -38,14 +38,13 @@ app.get("/", (req, res) => {
       .select("*")
       .from("users")
       .then((data) => {
-          console.log(data);
-          res.send(200).json({ "data": data })
+          //console.log(data);
+          return res.send(200).json({ "UsersData": data })
         })
   
   } catch (error) {
-    res.status(400).json({ message: " Unable to fetch data from database"});
+     return res.status(400).json({ message: " Unable to fetch data from database"});
   }
-  
 });
 
 app.post("/signin", signin.signInHandler(knex, bcrypt));

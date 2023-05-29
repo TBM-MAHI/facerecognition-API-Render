@@ -1,9 +1,13 @@
 function connectionToDB() {
-  const knex = require("knex")({
-    client: "pg",
-    connection:
-      "postgres://mahi:7nfoNMtE0XZRJubfeSV4q8kOFmNyDZgV@dpg-chd1mrl269vdj68g8e70-a.oregon-postgres.render.com/facerecognition_mkxq",
-  });
+    const knex = require("knex")({
+        client: "pg",
+        connection: {
+            host: "dpg-chd1mrl269vdj68g8e70-a.oregon-postgres.render.com",
+            user: "mahi",
+            password: "7nfoNMtE0XZRJubfeSV4q8kOFmNyDZgV",
+            database: "facerecognition_mkxq",
+        }
+    })
 
   knex
     .raw("SELECT 1")

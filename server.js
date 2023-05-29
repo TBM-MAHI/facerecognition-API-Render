@@ -3,12 +3,13 @@ const bodyParser = require("express");
 const bcrypt = require("bcrypt");
 var cors = require("cors");
 let app = express();
-require('dotenv').config();
-//importing API-endpoint functions 
-let signin = require('./controller/signIn/signIn')
-let register = require('./controller/Register/register')
-let profile = require('./controller/profile/profile')
+require("dotenv").config();
+//importing API-endpoint functions
+let signin = require("./controller/signIn/signIn");
+let register = require("./controller/Register/register");
+let profile = require("./controller/profile/profile");
 let image = require("./controller/imageEntry/image");
+let getallUserData = require("./controller/users");
 
 const PORT = process.env.PORT || 3001;
 let saltRounds = 10;
@@ -31,43 +32,29 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-
 app.get("/", (req, res) => {
-  try {
-    knex
-      .select("*")
-      .from("users")
-      .then((data) => {
-          //console.log(data);
-          return res.send(200).json({ "UsersData": data })
-        })
-  
-  } catch (error) {
-     return res.status(400).json({ message: " Unable to fetch data from database"});
-  }
+  getallUserData(req, res, knex);
 });
 
 app.post("/signin", signin.signInHandler(knex, bcrypt));
 
 app.post("/register", (req, res) => {
- register.registerHandler(req, res, knex, bcrypt, saltRounds);
+  register.registerHandler(req, res, knex, bcrypt, saltRounds);
 });
-  
+
 app.get("/profile/:idno", (req, res) => {
   profile.profileHandler(req, res, knex);
 });
 
 app.put("/image", (req, res) => {
-  image.entryHandler(req,res,knex)
+  image.entryHandler(req, res, knex);
 });
-app.post('/imageAPIcall', (req, res) => {
-  image.handleImgaeAPI(req, res)
-})
-app.listen( PORT, (req, res) => {
-  console.log(`server is listening...at port ${PORT} `);
-  console.log(process.env.MY_VAR); 
-
+app.post("/imageAPIcall", (req, res) => {
+  image.handleImgaeAPI(req, res);
 });
+app.listen(PORT, (req, res) =>
+  console.log(`server is listening...at port ${PORT} `)
+);
 
 /*
 /signin ==> POST = S/F

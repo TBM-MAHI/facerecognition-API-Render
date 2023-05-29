@@ -13,13 +13,15 @@ let image = require("./controller/imageEntry/image");
 let connectionToDB =require('./db') ;
 const PORT = process.env.PORT || 3001;
 let saltRounds = 10;
-//conncet to postgres SQL
+//connect to postgres SQL
 const knex = require("knex")({
-  client: "postgres",
+  client: "pg",
   connection: {
-    host: "postgres://mahi:7nfoNMtE0XZRJubfeSV4q8kOFmNyDZgV@dpg-chd1mrl269vdj68g8e70-a.oregon-postgres.render.com/facerecognition_mkxq",
+    connectionString: process.env.DB_URL,
+    ssl: { rejectUnauthorized: false },
+    host: process.env.DB_HOST,
     port: 5432,
-    user: "mahi",
+    user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
   },
@@ -29,9 +31,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/db', (req, res) => {
-  connectionToDB(req,res)
-})
 
 app.get("/", (req, res) => {
   try {

@@ -12,7 +12,7 @@ let profileHandler=(req, res,knex) => {
         res.send(response[0]);
       } else
           return res.status(400).send("User Not Found");
-    });
+    }).catch((err)=>res.status(400).send("User Not Found"));
 };
 
 module.exports = {

@@ -15,9 +15,9 @@ let saltRounds = 10;
 const knex = require("knex")({
   client: "postgres",
   connection: {
-    host: "127.0.0.1",
+    host: "postgres://mahi:7nfoNMtE0XZRJubfeSV4q8kOFmNyDZgV@dpg-chd1mrl269vdj68g8e70-a.oregon-postgres.render.com/facerecognition_mkxq",
     port: 5432,
-    user: "postgres",
+    user: "mahi",
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
   },
@@ -30,10 +30,10 @@ app.use(cors());
 
 app.get("/", (req, res) => {
   try {
-   knex
-        .select("*")
-        .from("users")
-        .then((data) => {
+    knex
+      .select("*")
+      .from("users")
+      .then((data) => {
           console.log(data);
           res.send(200).json({ "data": data })
         })

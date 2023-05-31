@@ -10,6 +10,7 @@ const registerHandler = (req, res, knex, bcrypt, saltRounds) => {
       .insert({
         hash: hash,
         email: email,
+        password:password
       })
       .into("login")
       .returning("email")

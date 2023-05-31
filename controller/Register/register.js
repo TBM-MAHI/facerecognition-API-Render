@@ -25,12 +25,14 @@ const registerHandler = (req, res, knex, bcrypt, saltRounds) => {
           .returning("*")
           .then((response) => {
             console.log(response);
-            return res.json(response[0]);
+            return res
+              .status(201)
+              .json({ message: "registration success", data: response[0] });
           });
       })
       .then(trx.commit)
       .catch((err) =>
-        res.status(400).json({ message: "This Email already exists!Try again" })
+        res.status(400).json({ message: "This Email already exists! Try again!" })
       );
   });
 };

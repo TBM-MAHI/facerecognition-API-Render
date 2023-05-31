@@ -17,9 +17,9 @@ const signInHandler = (knex, bcrypt) => (req, res) => {
            .where("email", "=", req.body.email)
            .then((user) => {
              //console.log(user);
-             res.status(200).json({ message: `sign in Success`, data:user[0] });
+             res.status(200).json({ message: `sign in Success`, data: user[ 0 ] });
            })
-           .catch((err) => res.status(400).json("Unable to get user"));
+           .catch((err) => res.status(400).json({ message: "Unable to get user" }));
        }
        else
          return res.status(400).json({ message : "Password Incorrect!"});

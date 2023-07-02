@@ -33,7 +33,7 @@ const registerHandler = (req, res, knex, bcrypt, saltRounds) => {
       })
       .then(trx.commit)
       .catch((err) =>
-        res.status(400).json({ message: "This Email already exists! Try again!" })
+         res.status(400).json({ message: "This Email already exists! Try again!" })
       );
   });
 };

@@ -62,8 +62,7 @@ let entryHandler = (req, res, knex) => {
     .returning("entries")
     .then((response) => {
       if (response.length) {
-        console.log(response);
-        return res.json(response);
+        return res.json({response});
       } else return res.status(400).json({ message: "User Not Found" });
     });
 };

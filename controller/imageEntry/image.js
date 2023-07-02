@@ -50,7 +50,6 @@ let handleImgaeAPI = (req, res) => {
   )
     .then((apiData) => apiData.json())
     .then((result) => res.send(result))
-
     .catch((err) => res.status(400).json({ "error": err }));
 };
 

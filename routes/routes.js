@@ -13,7 +13,9 @@ let image = require('../controller/imageEntry/image');
 let getallUserData = require('../controller/users');
 
 //for testing db
-apiRouter.get("/all", getallUserData);
+apiRouter.get("/all", (req, res, connect_DB) => {
+    getallUserData(req, res, connect_DB);
+});
 
 apiRouter.post("/signin", signin.signInHandler(connect_DB, bcrypt));
 

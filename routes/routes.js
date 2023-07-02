@@ -13,7 +13,7 @@ let image = require('../controller/imageEntry/image');
 let getallUserData = require('../controller/users');
 
 //for testing db
-apiRouter.get("/all", (req, res, connect_DB) => {
+apiRouter.get("/all", (req, res) => {
     getallUserData(req, res, connect_DB);
 });
 
